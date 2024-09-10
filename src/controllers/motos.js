@@ -1,35 +1,28 @@
-const db = [];
+const Moto = require("../models/motos.js")
 
-const model = require("../models/motos.js")
-
-const store = (body) => {
-    const novo = model(body);
-    if(novo){
-        db.push(novo);
-        return 200;
-    }
-    return 400;
+const store = (req, res) => {
+    Moto.create(req.body);
+    res.json();
 }
 
-const show = (id) => db.find((el) => el.id == id);
 
-const index = () => db;
+const index = (req, res) => {
+    const content = Moto.find().exec;
+    res.json(content);
+};
 
+const show = (req, res) => {
+    const content = Moto.findById(req.params.id).exec;
+    res.json(content);
+}
 const update = (body, id) => {
-    const index = db.findIndex((el) => el.id == id);
-    const novo = model(body, parseInt(id));
-    if(index != -1 && novo){
-        db[index] = novo
-        return 200;
-    }
-    return 400;
+    Moto.findByIdAndUpdate(req.paramsid, req.body).exec;
+    res.json();
 }
 
-const destroy = (id) => {
-    const index = db.findIndex((el) => el.id == id);
-    if(index != -1){
-        db.splice(index, 1);
-    }
+const destroy = (req, res) => {
+    Moto.findByIdAndDelete(req.params.id).exec;
+    res.json();
 }
 
 module.exports = {

@@ -1,14 +1,16 @@
 const express = require("express")
-const produtos_router = require("./router/produtos.js");
-const fornecedores_router = require("./router/fornecedores.js");
-const mercados_router = require("./router/mercados.js");
+const motos = require("./router/motos.js");
+const refrigerantes = require("./router/refrigerantes.js");
+const aeroportos = require("./router/aeroportos.js");
+const canetas = require("./router/canetas.js")
 const porta = 3000;
 const app = express();
 
 app.use(express.json());
-app.use("/mercado", mercados_router);
-app.use("/produto", produtos_router)
-app.use("/fornecedor", fornecedores_router)
+app.use("/aeroporto", aeroportos);
+app.use("/moto", motos)
+app.use("/refrigerante", refrigerantes)
+app.use("/caneta", canetas);
 
 
 
