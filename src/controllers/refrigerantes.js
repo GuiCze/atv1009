@@ -1,35 +1,36 @@
-const model = require("../models/refrigerantes.js")
+const Refrigerante = require("../models/refrigerantes.js")
 
-const db = [];
-
-const store = (body) => {
-    const novo = model(body);
-    if(novo){
-        db.push(novo);
-        return 200;
-    }
-    return 400;
+const store = (req, res) => {
+    Refrigerante.create(req.body);
+    res.json();
 }
 
-const show = (id) => db.find((el) => el.id == id);
 
-const index = () => db;
+const index = async (req, res) => {
+    try {
+        const content = await Refrigerante.find().exec();
+        res.status(200).json(content);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
 
+const show = async (req, res) => {
+    try {
+        const content = await Refrigerante.findById(req.params.id).exec();
+        res.status(200).json(content);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
 const update = (body, id) => {
-    const index = db.findIndex((el) => el.id == id);
-    const novo = model(body, parseInt(id));
-    if(index != -1 && novo){
-        db[index] = novo
-        return 200;
-    }
-    return 400;
+    Refrigerante.findByIdAndUpdate(req.paramsid, req.body).exec;
+    res.json();
 }
 
-const destroy = (id) => {
-    const index = db.findIndex((el) => el.id == id);
-    if(index != -1){
-        db.splice(index, 1);
-    }
+const destroy = (req, res) => {
+    Refrigerante.findByIdAndDelete(req.params.id).exec;
+    res.json();
 }
 
 module.exports = {

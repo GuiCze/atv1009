@@ -2,7 +2,7 @@ const db = require("../db.js")
 
 const Schema = db.Schema;
 
-const refrigeranteSchema = new Schema({
+const canetaSchema = new Schema({
     cor: {
         type: String,
         required: true
@@ -13,7 +13,7 @@ const refrigeranteSchema = new Schema({
     }
 });
 
-const Refrigerante = db.model("Refrigerante", refrigeranteSchema);
+const Caneta = db.model("Caneta", canetaSchema);
 
 
-module.exports = Refrigerante;
+module.exports = Caneta;
