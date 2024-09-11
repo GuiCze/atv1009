@@ -6,17 +6,17 @@ const store = (req, res) => {
 }
 
 
-const index = (req, res) => {
-    const content = Aeroporto.find().exec;
-    res.json(content);
+const index = async (req, res) => {
+        const content = await Aeroporto.find().exec();
+        res.status(200).json(content);
 };
 
-const show = (req, res) => {
-    const content = Aeroporto.findById(req.params.id).exec;
-    res.json(content);
-}
-const update = (body, id) => {
-    Aeroporto.findByIdAndUpdate(req.paramsid, req.body).exec;
+const show = async (req, res) => {
+        const content = await Aeroporto.findById(req.params.id).exec();
+        res.status(200).json(content);  
+};
+const update = (req, res) => {
+    Aeroporto.findByIdAndUpdate(req.params.id, req.body, {new: true}).exec();
     res.json();
 }
 

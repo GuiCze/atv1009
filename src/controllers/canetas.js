@@ -6,15 +6,23 @@ const store = (req, res) => {
 }
 
 
-const index = (req, res) => {
-    const content = Caneta.find().exec;
-    res.json(content);
+const index = async (req, res) => {
+    try {
+        const content = await Caneta.find().exec();
+        res.status(200).json(content);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 };
 
-const show = (req, res) => {
-    const content = Caneta.findById(req.params.id).exec;
-    res.json(content);
-}
+const show = async (req, res) => {
+    try {
+        const content = await Caneta.findById(req.params.id).exec();
+        res.status(200).json(content);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
 const update = (body, id) => {
     Caneta.findByIdAndUpdate(req.paramsid, req.body).exec;
     res.json();
